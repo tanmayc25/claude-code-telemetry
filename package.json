@@ -1,0 +1,23 @@
+{
+  "name": "claude-code-telemetry",
+  "version": "1.0.0",
+  "description": "Lightweight local telemetry tracker for Claude Code",
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/start.ts",
+    "server": "tsx src/server.ts",
+    "report": "tsx src/report.ts",
+    "dashboard": "tsx src/dashboard.ts"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.7.0",
+    "fastify": "^5.2.1",
+    "protobufjs": "^7.4.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/node": "^22.10.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
