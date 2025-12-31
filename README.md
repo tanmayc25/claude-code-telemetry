@@ -84,6 +84,56 @@ claude-code-telemetry/
 └── package.json
 ```
 
+## Auto-Start on Login (macOS)
+
+To run the telemetry server automatically on login, create a LaunchAgent:
+
+1. Create the plist file:
+   ```bash
+   nano ~/Library/LaunchAgents/com.claude-code-telemetry.plist
+   ```
+
+2. Add this content (update the `WorkingDirectory` path):
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+   <plist version="1.0">
+   <dict>
+       <key>Label</key>
+       <string>com.claude-code-telemetry</string>
+       <key>ProgramArguments</key>
+       <array>
+           <string>/opt/homebrew/bin/npm</string>
+           <string>run</string>
+           <string>server</string>
+       </array>
+       <key>WorkingDirectory</key>
+       <string>/path/to/claude-code-telemetry</string>
+       <key>RunAtLoad</key>
+       <true/>
+       <key>KeepAlive</key>
+       <true/>
+   </dict>
+   </plist>
+   ```
+
+3. Load it:
+   ```bash
+   launchctl load ~/Library/LaunchAgents/com.claude-code-telemetry.plist
+   ```
+
+4. Manage the service:
+   ```bash
+   # Stop
+   launchctl unload ~/Library/LaunchAgents/com.claude-code-telemetry.plist
+
+   # Start
+   launchctl load ~/Library/LaunchAgents/com.claude-code-telemetry.plist
+
+   # Check status
+   launchctl list | grep claude
+   ```
+
 ## Requirements
 
 - Node.js 18+
